@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>java calculator</title>
+    <style>
+        .play{
+            width: 500px;
+        }
+        #pointer{
+            margin-left: 200px;
+        }
+    </style>
+    
+    <script>
+       function changeamount(){
+         document.getElementById("txtamount").value = document.getElementById("rangeamount").value;
+       }
+       function changeyear(){
+        document.getElementById("txtyears").value = document.getElementById("rangeyears").value;
+       }
+       function changerate(){
+        document.getElementById("txtrate").value = document.getElementById("rangerate").value;
+       }
+       function calculateclick(){
+        var p =  parseInt(document.getElementById("txtamount").value);
+        var r = parseFloat(document.getElementById("txtrate").value)/12/100;
+        var n = parseInt(document.getElementById("txtyears").value)*12;
+
+        var emi = p*r*Math.pow(1+r,n)/Math.pow(1+r,n) -1;
+
+        document.getElementById("result").innerHTML = "monthly installment for your account" + p +"for" + n + "month is" +  "<b> &#8377;" + Math.round(emi)+ "</br";
+
+       }
+       function BMIclick(){
+        var w = parseInt(document.getElementById("txtweight").value);
+        var h = parseInt(document.getElementById("txtheight").value)/100;
+        var bmi  = w/Math.pow(h**2);
+
+        document.getElementById("result2").innerHTML = "your body mass index is" +""+ Math.round(bmi)+ "</br";
+       }
+       
+       
+    </script>
+    
+</head>
+<body class="container-fluid">
+    <div class="row">
+        <div class="col">
+        <marquee><h1 class="text-primary"><I>HDFC EMI CALCULATOR</I></h1></marquee>
+        </div>
+    </div>
+    <div class=" border border-3 bg-light ">
+        <div class="row mt-3  p-2">
+            <div class="col">
+                amount you need &#8377;<input type="text" id="txtamount" size="15">
+            </div>
+            <div class="col">
+                for<input type="text" id="txtyears" size="4"> years
+            </div>
+            <div class="col">
+                interest rate<input type="text" id="txtrate" size="4"> %
+            </div>
+        </div>
+        <div class="row mt-3 p-2">
+            <div class="col">
+                 &#8377;10000  <input type="range" id="rangeamount"  class="form-range" onchange="changeamount()" value="10000" min="10000" max="5000000">  &#8377;5000000
+            </div>
+            <div class="col">
+                1<input type="range" id="rangeyears" onchange="changeyear()" value="1" min="1" max="5" class="form-range"> 5
+            </div>
+            <div class="col">
+               10.45% <input class="form-range" type="range" id="rangerate" onchange="changerate()" value="10.45" min="10.45" step="0.1" max="18.45"> 18.45%
+            </div>
+        </div>
+        <div class="row mt-3 p-2">
+            <div class="col text-center">
+                <button class="btn btn-primary" onclick="calculateclick()" ><h3>calculate</h3></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            
+                <p id="result"></p>
+            
+        </div>
+    </div>
+    <!--bmi calculator-->
+    <div class="row mt-4">
+        <div class="col bg-dark mt-4">
+            <marquee><h1 class="text-success ">HERBAL LIFE NUTRITION</h1></marquee>
+        </div>
+    </div>
+    <div class=" row mt-4">
+        <div class="col-lg-12 d-flex justify-content-center align-item-center mt-4">
+            <div class="border border-2 p-2 play">
+                <div>
+                    <span>
+                        <input type="radio" name="gender" class="form-check-input">male
+                    </span>
+                    <span>
+                        <input type="radio" name="gender" class="form-check-input ms-4">female
+                    </span>
+                </div>
+                <div class="mt-4">
+                    <div>
+                        <label for="age" class="form-label">Age(! year or above)</label>
+                        <div>
+                            <input type="text" name="age" id="txtage" class="form-control" >
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mt-3 ">
+                    <div>
+                        <label for="height" class="form-label">height</label>
+                        <div>
+                            <input type="text" name="height" id="txtheight" class="form-control" placeholder="in cm">
+                        </div>
+                    </div>
+                    <div class="ms-4 ">
+                        <label for="weight" class="form-label">weight</label>
+                        <div>
+                            <input type="text" name="weight" id="txtweight" class="form-control" placeholder="in kg">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary mt-4" onclick= "BMIclick()">measure</button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="progress">
+                <div class="progress-bar bg-success text-white" style="width: 400px;">
+                    < 52 under weight
+                </div>
+                <div class="progress-bar bg-danger text-white" style="width:400px;">
+                    53 to 72 normal weight
+                </div>
+                <div class="progress-bar bg-info text-white" style="width:400px;">
+                    > 72 overweight
+                </div>
+            </div>
+            <div>
+                <h4 id="pointer"><i class="bi bi-caret-down-fill"></i></h4>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <p id="result2"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
